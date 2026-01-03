@@ -4,12 +4,16 @@ import cookieParser from "cookie-parser";
 import userRouter from "./routes/user.auth.js";
 import dbConnect from "./utils/db.js";
 import expenseRouter from "./routes/expense.route.js";
+import cors from "cors";
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000
 
 
-
+app.use(cors({
+    origin:["http://localhost:5174" ,  "http://localhost:5173"],
+    credentials:true
+}))
 
 app.use(cookieParser());
 app.use(express.json());
