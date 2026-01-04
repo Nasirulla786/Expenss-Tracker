@@ -8,7 +8,7 @@ import { serverURL } from "../App";
 // Dummy logo (SVG style UI element)
 const DummyLogo = () => (
   <div className="h-12 w-12 rounded-full bg-sky-500 flex items-center justify-center text-white font-bold text-xl shadow">
-    ₹
+   DB
   </div>
 );
 
@@ -52,7 +52,11 @@ const Mainscreen = () => {
             Track and manage your expenses
           </p>
         </div>
-        <DummyLogo />
+      <div  onClick={()=>{
+          navigate("/dashboard")
+        }} >
+          <DummyLogo/>
+      </div>
       </div>
 
       {/* ===== Total Expense Card ===== */}
@@ -78,7 +82,7 @@ const Mainscreen = () => {
 
         <div className="bg-white rounded-2xl p-4 shadow flex items-center justify-between">
           <div>
-            <p className="text-sm text-sky-600">Add Expense</p>
+            <p className="text-sm text-sky-600">Manage Expense</p>
             <p className="text-xs text-gray-400">Quick entry</p>
           </div>
           <button
@@ -102,7 +106,7 @@ const Mainscreen = () => {
             onClick={() => navigate("/addexpense")}
             className="text-sky-600 hover:text-sky-800 text-sm font-medium"
           >
-            View More →
+            More Expenses →
           </button>
         </div>
 
@@ -132,11 +136,7 @@ const Mainscreen = () => {
                 {item.amount}
               </p>
 
-              {/* UI only delete icon */}
-              <Trash2
-                size={16}
-                className="text-red-400 hover:text-red-600 cursor-pointer"
-              />
+
             </div>
           </div>
         ))}

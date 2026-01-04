@@ -12,6 +12,7 @@ import axios from "axios";
 import { setUserData } from "./redux/userdata/userslice";
 import Mainscreen from "./pages/Mainscreen";
 import Addexpense from "./pages/Addexpense";
+import Dashboard from "./pages/Dashboard";
 
 export const serverURL = "http://localhost:3000";
 
@@ -57,6 +58,8 @@ function App() {
 
         <Route path="/mainscreen" element={<Mainscreen />} />
         <Route path="/addexpense" element={<Addexpense />}/>
+        <Route path="/dashboard" element={<Dashboard />}/>
+
       </Routes>
     </div>
   );

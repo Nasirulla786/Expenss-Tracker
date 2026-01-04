@@ -1,7 +1,31 @@
 import React from "react";
 import { CalendarDays, IndianRupee, Trash2 } from "lucide-react";
+import axios from "axios";
+import { serverURL } from "../App";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Allexpense = ({ expense }) => {
+  const [showExpense, setShowExpense] = useState([]);
+
+  useEffect(() => {
+    setShowExpense(expense);
+  }, [expense]);
+
+  const handleDelete = async (e) => {
+    try {
+      await axios.delete(`${serverURL}/api/expense/deleteexpense/${e}`, {
+        withCredentials: true,
+      });
+      // console.log(res);
+
+      setShowExpense((prev) => prev.filter((exp) => exp._id !== e));
+    } catch (error) {
+      console.log("handle delete error", error);
+    }
+  };
+
+  // console.log(finalData);
   return (
     <div className="min-h-screen bg-sky-50 p-5 flex flex-col">
       {/* Header */}
@@ -22,7 +46,7 @@ const Allexpense = ({ expense }) => {
 
         {/* Expense Cards */}
         <div className="space-y-4">
-          {expense.map((e, idx) => (
+          {showExpense.map((e, idx) => (
             <div
               key={idx}
               className="bg-white rounded-2xl shadow-sm p-4 flex justify-between items-center hover:shadow-md transition"
@@ -47,7 +71,10 @@ const Allexpense = ({ expense }) => {
                 </div>
 
                 {/* UI-ONLY Delete Icon */}
-                <div className="text-gray-300 cursor-not-allowed">
+                <div
+                  className="text-red-500 cursor-pointer hover:text-red-700"
+                  onClick={() => handleDelete(e._id)}
+                >
                   <Trash2 size={18} />
                 </div>
               </div>
