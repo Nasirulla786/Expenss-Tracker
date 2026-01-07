@@ -14,7 +14,7 @@ import Mainscreen from "./pages/Mainscreen";
 import Addexpense from "./pages/Addexpense";
 import Dashboard from "./pages/Dashboard";
 
-export const serverURL = "http://localhost:3000";
+export const serverURL = "https://expenss-tracker-1.onrender.com";
 
 function App() {
   const userData = useSelector((state) => state.user);
