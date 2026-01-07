@@ -51,13 +51,13 @@ export const loginUSer = async (req, res) => {
     if (!checkEmail) {
       return res
         .status(409)
-        .json({ message: "Incorrect email and password..!" });
+        .json({ message: "Incorrect email and password..!",sucess:false });
     }
 
     const isMatch = await bcrypt.compare(password, checkEmail.password);
 
     if (!isMatch) {
-      return res.status(401).json({ message: "Incorrect email or password" });
+      return res.status(401).json({ message: "Incorrect email or password" , sucess:false });
     }
 
     const token = await GenerateToken(checkEmail?._id);
@@ -66,7 +66,7 @@ export const loginUSer = async (req, res) => {
 
     return res
       .status(200)
-      .json({ message: "Login successfully..!", data: checkEmail });
+      .json({ message: "Login successfully..!", data: checkEmail  , sucess:true});
   } catch (error) {
     console.log("login error", error);
   }

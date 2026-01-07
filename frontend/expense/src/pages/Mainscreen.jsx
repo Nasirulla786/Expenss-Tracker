@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Trash2, IndianRupee, Wallet, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { serverURL } from "../App";
+import { setUserData } from "../redux/userdata/userslice";
 
 // Dummy logo (SVG style UI element)
 const DummyLogo = () => (
@@ -16,6 +17,7 @@ const Mainscreen = () => {
   const userdata = useSelector((state) => state.user);
   const name = userdata?.userData?.name || "User";
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [expenses, setExpenses] = useState([]);
 
@@ -52,11 +54,23 @@ const Mainscreen = () => {
             Track and manage your expenses
           </p>
         </div>
-      <div  onClick={()=>{
+   <div className="flex items-center justify-center gap-5">
+    <h1 className="text-white bg-red-500 p-2 rounded w-20 text-center cursor-pointer" onClick={async()=>{
+      const res = await axios.get(`${serverURL}/api/user/logout` ,{withCredentials:true});
+      if(res){
+        dispatch(setUserData(null));
+        alert("Logout sucessfully..!");
+
+        navigate("/login");
+      }
+
+    }}>Logo</h1>
+       <div  onClick={()=>{
           navigate("/dashboard")
         }} >
           <DummyLogo/>
       </div>
+   </div>
       </div>
 
       {/* ===== Total Expense Card ===== */}

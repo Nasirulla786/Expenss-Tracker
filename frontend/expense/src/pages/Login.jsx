@@ -15,12 +15,16 @@ export default function Login() {
             const password =e.target.password.value;
 
             const res = await axios.post(`${serverURL}/api/user/login` , {email , password},{withCredentials:true});
+            // console.log("this is res",);
 
-          if(res){
+          if(res.data.sucess){
               dispatch(setUserData(res.data));
               naviagte("/");
           }
 
+
+
+         
         } catch (error) {
             dispatch(setUserData(null));
             console.log("Login error", error);

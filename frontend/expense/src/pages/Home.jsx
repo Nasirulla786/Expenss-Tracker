@@ -6,24 +6,11 @@ import { serverURL } from "../App";
 import WelcomePage from "./WelcomePage";
 
 const Home = () => {
-  const dispatch = useDispatch();
+
   return (
     <div>
 
       <WelcomePage />
-      {/* <button
-        onClick={ async() => {
-            const res = await axios.get(`${serverURL}/api/user/logout` , {withCredentials:true});
-            if(res){
-
-          dispatch(setUserData(null));
-
-            }
-
-        }}
-      >
-        Logout
-      </button> */}
     </div>
   );
 };
